@@ -1,0 +1,38 @@
+@When("^Enter submit without enterung other technology$")
+public void enter_submit_without_enterung_other_technology() throws Throwable {
+driver.switchTo().alert().dismiss();
+cBean.technologiesclick(1);
+cBean.technologiesclick(3);
+status=true;
+cBean.clickButton();
+Thread.sleep(1000);
+
+}
+
+@Then("^Get alert with Please fill other Technologies Used \"(.*?)\"$")
+public void get_alert_with_Please_fill_other_Technologies_Used(String arg1) throws Throwable {
+if(status) {
+String actual=driver.switchTo().alert().getText();
+assertEquals(arg1,actual);
+}else {
+assertTrue(true);
+}
+}
+
+
+
+@When("^clicking next if all fields are valid$")
+public void clicking_next_if_all_fields_are_valid() throws Throwable {
+driver.switchTo().alert().dismiss();
+if(status)
+{
+cBean.setOther("c#");
+cBean.clickButton();
+
+Thread.sleep(1000);
+
+}
+else 
+cBean.clickButton();
+
+}
